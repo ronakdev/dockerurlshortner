@@ -4,9 +4,10 @@ const get = require('./get')
 const add = require('./add')
 const port = 3000
 const home = require('./home')
-const app = express()
 const mongo = require('./mongoMain')
-mongo.db.once('open', () => {
+
+mongo.connect("mongo").then(() => {
+  const app = express()
   app.get('/', async (req, res) => {
     // get all urls
     get.allLinks().then(links => {

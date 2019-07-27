@@ -5,7 +5,17 @@
  * module.exports.db = mongoose.connection
  */
 const mongoose = require('mongoose')
-mongoose.Promise = Promise
-mongoose.connect('mongodb://mongo:27017/nmdproject', {useNewUrlParser: true})
+
+module.exports.connect = (target) => {
+  return new Promise( (resolve, reject) => {
+    mongoose.Promise = Promise
+    mongoose.connect(`mongodb://${target}:27017/nmdproject`, {useNewUrlParser: true})
+      .catch((error) => {
+        reject(error)
+      }).then(() => {
+        resolve()
+      })
+  })
+}
 module.exports.db = mongoose.connection
 module.exports.mongoose = mongoose
