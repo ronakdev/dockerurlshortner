@@ -1,0 +1,19 @@
+version: "2"
+services:
+  app:
+    container_name: app
+    restart: always # if the container fails, restart the image
+    build: . # build this image using the Dockerfile found in this directory
+    ports:
+      - "3000:3000" # map host port 3000 to container port 3000
+    links:
+      - mongo # link to mongo service
+  mongo:
+    container_name: mongo
+    image: mongo # use mongo image (pull if needed)
+    volumes:
+      - ./data:/data/db # mount host ./data to container directory /data/db 
+      # note line 73 of mongo Dockefile: VOLUME /data/db /data/configdb
+      # https://github.com/docker-library/mongo/blob/00a8519463e776e797c227681a595986d8f9dbe1/3.0/Dockerfile?source=post_page---------------------------
+    ports:
+      - "27017:27017" # map host port 27017 to container port 27017
