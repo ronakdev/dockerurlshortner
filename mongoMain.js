@@ -6,6 +6,6 @@
  */
 const mongoose = require('mongoose')
 mongoose.Promise = Promise
-mongoose.connect('mongodb://localhost:27017/nmdproject', {useNewUrlParser: true});
+mongoose.connect('mongodb://mongo:27017/nmdproject', {useNewUrlParser: true})
 module.exports.db = mongoose.connection
 module.exports.mongoose = mongoose

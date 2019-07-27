@@ -14,4 +14,4 @@ COPY . /usr/src/app
 
 # expose port and begin the server
 EXPOSE 3000
-CMD ["npm", "start"]
+CMD ["npm", "start", "&"]
